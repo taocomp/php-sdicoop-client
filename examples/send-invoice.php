@@ -13,13 +13,11 @@ try
     Client::setClientCert(__DIR__ . '/client.pem');
     Client::setCaCert(__DIR__ . '/ca.pem');
 
-    // Set services
-    Client::setService('SdIRiceviFile', array(
+    $client = new Client(array(
         'endpoint' => 'https://testservizi.fatturapa.it/ricevi_file',
-        'wsdl'     => __DIR__ . '/../wsdl/SdIRiceviFile_v1.0.wsdl'        
+        'wsdl'     => __DIR__ . '/../wsdl/SdIRiceviFile_v1.0.wsdl'
     ));
-
-    $client = new Client('SdIRiceviFile');
+    
     $invoice = new FileSdIAccoglienza();
     $invoice->import(__DIR__ . '/invoice.xml')->encodeFile();
     $response = new RispostaSdIRiceviFile($client->RiceviFile($invoice));

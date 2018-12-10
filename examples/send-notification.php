@@ -13,13 +13,11 @@ try
     Client::setClientCert(__DIR__ . '/client.pem');
     Client::setCaCert(__DIR__ . '/ca.pem');
 
-    // Set service
-    Client::setService('SdIRiceviNotifica', array(
+    $client = new Client(array(
         'endpoint' => 'https://testservizi.fatturapa.it/ricevi_notifica',
         'wsdl'     => __DIR__ . '/../wsdl/SdIRiceviNotifica_v1.0.wsdl'
     ));
-
-    $client = new Client('SdIRiceviNotifica');
+    
     $notification = new FileSdI();
     $notification->import(__DIR__ . '/notification.xml')->encodeFile();
     $response = new RispostaSdINotificaEsito($client->NotificaEsito($notification));

@@ -9,8 +9,6 @@ class Client extends \SoapClient
     protected static $proxyUrl = null;
     protected static $proxyAuth = null;
 
-    protected static $services = array();
-
     // --------------------------------------------------------------
     // Configuration
     // --------------------------------------------------------------
@@ -28,11 +26,6 @@ class Client extends \SoapClient
     public static function setCaCert( string $file )
     {
         self::$caCert = $file;
-    }
-
-    public static function setService( string $service, array $conf )
-    {
-        self::$services[$service] = $conf;
     }
 
     public static function setProxyUrl( string $proxyUrl )
@@ -64,15 +57,22 @@ class Client extends \SoapClient
     // Construct
     // --------------------------------------------------------------
 
-    public function __construct( string $service )
+    public function __construct( array $service )
     {
+        if (false === array_key_exists('endpoint', $service)) {
+            throw new \Exception("Cannot find key 'endpoint' in service conf");
+        }
+        if (false === array_key_exists('wsdl', $service)) {
+            throw new \Exception("Cannot find key 'wsdl' in service conf");
+        }
+
         $options = array(
-            'location' => self::$services[$service]['endpoint'],
+            'location' => $service['endpoint'],
             'cache_wsdl' => WSDL_CACHE_NONE,
             'trace' => true
         );
         
-        parent::__construct(self::$services[$service]['wsdl'], $options);
+        parent::__construct($service['wsdl'], $options);
     }
 
     // --------------------------------------------------------------
