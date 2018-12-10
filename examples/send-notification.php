@@ -20,7 +20,8 @@ try
     ));
 
     $client = new Client('SdIRiceviNotifica');
-    $notification = new FileSdI(__DIR__ . '/notification.xml');
+    $notification = new FileSdI();
+    $notification->import(__DIR__ . '/notification.xml')->encodeFile();
     $response = new RispostaSdINotificaEsito($client->NotificaEsito($notification));
 
     // Process response:

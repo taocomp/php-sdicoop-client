@@ -20,7 +20,8 @@ try
     ));
 
     $client = new Client('SdIRiceviFile');
-    $invoice = new FileSdIAccoglienza(__DIR__ . '/invoice.xml');
+    $invoice = new FileSdIAccoglienza();
+    $invoice->import(__DIR__ . '/invoice.xml')->encodeFile();
     $response = new RispostaSdIRiceviFile($client->RiceviFile($invoice));
 
     // Process response:

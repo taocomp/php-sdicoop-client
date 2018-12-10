@@ -4,20 +4,27 @@ class FileSdI extends FileSdIBase
 {
     public $IdentificativoSdI = null;
 
-    protected function setFromObject( \StdClass $obj )
+    public function __construct( \StdClass $parametersIn = null )
     {
-        parent::setFromObject($obj);
-        
-        if (!property_exists($obj, 'IdentificativoSdI')) {
-            throw new \Exception("Cannot find property 'IdentificativoSdI'");
-        }
+        parent::__construct($parametersIn);
 
-        $this->IdentificativoSdI = $obj->IdentificativoSdI;
+        if ($parametersIn) {
+            if (!property_exists($parametersIn, 'IdentificativoSdI')) {
+                throw new \Exception("Cannot find property 'IdentificativoSdI'");
+            }
+
+            $this->IdentificativoSdI = $parametersIn->IdentificativoSdI;
+        }
     }
 
-    protected function setFromFile( string $file )
+    public function __toString()
     {
-        parent::setFromFile($file);
+        return "IdentificativoSdI:{$this->IdentificativoSdI} " . parent::__toString();
+    }
+
+    public function import( string $file )
+    {
+        parent::import($file);
 
         $xml = simplexml_load_file($file);
 
@@ -26,10 +33,7 @@ class FileSdI extends FileSdIBase
         }
 
         $this->IdentificativoSdI = $xml->IdentificativoSdI;
-    }
 
-    public function __toString()
-    {
-        return "IdentificativoSdI:{$this->IdentificativoSdI} " . parent::__toString();
+        return $this;
     }
 }
