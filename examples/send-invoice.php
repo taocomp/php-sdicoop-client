@@ -19,6 +19,9 @@
  * along with php-sdicoop-client.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+ini_set("soap.wsdl_cache_enabled", 0);
+ini_set('soap.wsdl_cache_ttl', 0);
+
 use \Taocomp\Sdicoop\Client;
 use \Taocomp\Sdicoop\FileSdIBase;
 use \Taocomp\Sdicoop\RispostaSdIRiceviFile;
