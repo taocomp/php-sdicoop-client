@@ -1,7 +1,7 @@
 <?php
 
 use \Taocomp\Sdicoop\Client;
-use \Taocomp\Sdicoop\FileSdIAccoglienza;
+use \Taocomp\Sdicoop\FileSdIBase;
 use \Taocomp\Sdicoop\RispostaSdIRiceviFile;
 
 try
@@ -18,7 +18,7 @@ try
         'wsdl'     => __DIR__ . '/../wsdl/SdIRiceviFile_v1.0.wsdl'
     ));
     
-    $invoice = new FileSdIAccoglienza();
+    $invoice = new FileSdIBase();
     $invoice->import(__DIR__ . '/invoice.xml')->encodeFile();
     $response = new RispostaSdIRiceviFile($client->RiceviFile($invoice));
 

@@ -15,7 +15,7 @@ class RispostaSdINotificaEsito
     public function __construct( \StdClass $obj )
     {
         $this->Esito = $obj->Esito;
-        $this->ScartoEsito = new ScartoEsito($obj->ScartoEsito);
+        $this->ScartoEsito = new FileSdIBase($obj->ScartoEsito);
 
         Client::log($this);
     }
