@@ -38,7 +38,7 @@ class FileSdIBase
         
             $this->NomeFile = $parametersIn->NomeFile;
             $this->File = $parametersIn->File;
-            $this->decodeFile();
+            $this->removeBOM();
         }
     }
 
@@ -55,21 +55,20 @@ class FileSdIBase
 
         $this->NomeFile = basename($file);
         $this->File = file_get_contents($file);
+        $this->removeBOM();
 
         return $this;
     }
 
-    public function encodeFile()
+    /**
+     * Remove UTF-8 BOM
+     *
+     * Credits: https://forum.italia.it/u/Francesco_Biegi
+     * See https://forum.italia.it/t/risolto-notifica-di-scarto-content-is-not-allowed-in-prolog/5798/7
+     */
+    public function removeBOM()
     {
-        // https://forum.italia.it/t/risolto-notifica-di-scarto-content-is-not-allowed-in-prolog/5798/7
         $this->File = str_replace("\xEF\xBB\xBF", '', $this->File);
-
-        return $this;
-    }
-
-    public function decodeFile()
-    {
-        $this->File = base64_decode($this->File);
 
         return $this;
     }

@@ -41,7 +41,7 @@ try
     ));
     
     $notification = new FileSdI();
-    $notification->import(__DIR__ . '/notification.xml')->encodeFile();
+    $notification->import(__DIR__ . '/notification.xml');
     $response = new RispostaSdINotificaEsito($client->NotificaEsito($notification));
 
     // Process response:

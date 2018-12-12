@@ -41,7 +41,7 @@ try
     ));
     
     $invoice = new FileSdIBase();
-    $invoice->import(__DIR__ . '/invoice.xml')->encodeFile();
+    $invoice->import(__DIR__ . '/invoice.xml');
     $response = new RispostaSdIRiceviFile($client->RiceviFile($invoice));
 
     // Process response:
