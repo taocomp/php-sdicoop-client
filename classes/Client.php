@@ -23,46 +23,95 @@ namespace Taocomp\Sdicoop;
 
 class Client extends \SoapClient
 {
+    /**
+     * Constants
+     *
+     * Credits: https://forum.italia.it/u/cesco69
+     */
+    const USER_AGENT = 'Mozilla/4.0 (compatible; MSIE 5.01; Windows NT 5.0)';
+    const REGEX_ENV  = '/<soap[\s\S]*nvelope>/i';
+    const REGEX_XOP  = '/<xop:include[\s\S]*cid:%s@[\s\S]*?<\/xop:Include>/i';
+    const REGEX_CID  = '/cid:([0-9a-zA-Z-]+)@/i';
+    const REGEX_CON  = '/Content-ID:[\s\S].+?%s[\s\S].+?>([\s\S]*?)--MIMEBoundary/i';
+
+    /**
+     * Client private key
+     */
     protected static $privateKey = null;
+
+    /**
+     * Client certificate
+     */
     protected static $clientCert = null;
+
+    /**
+     * CA certificate
+     */
     protected static $caCert = null;
 
+    /**
+     * Proxy URL, if any
+     */
     protected static $proxyUrl = null;
+
+    /**
+     * Proxy authentication, if any
+     */
     protected static $proxyAuth = null;
 
-    // --------------------------------------------------------------
-    // Configuration
-    // --------------------------------------------------------------
+    /**
+     * SOAP client last request/response headers/body
+     *
+     * Credits: https://forum.italia.it/u/cesco69
+     */
+    private $lastRequestHeaders;
+    private $lastResponseHeaders;
+    private $lastRequestBody;
+    private $lastResponseBody;
 
+    /**
+     * Set private key
+     */
     public static function setPrivateKey( string $file )
     {
         self::$privateKey = $file;
     }
     
+    /**
+     * Set client cert
+     */
     public static function setClientCert( string $file )
     {
         self::$clientCert = $file;
     }
     
+    /**
+     * Set CA cert
+     */
     public static function setCaCert( string $file )
     {
         self::$caCert = $file;
     }
 
+    /**
+     * Set proxy URL, if any
+     */
     public static function setProxyUrl( string $proxyUrl )
     {
         self::$proxyUrl = $proxyUrl;
     }
 
+    /**
+     * Set proxy authentication, if any
+     */
     public static function setProxyAuth( string $proxyAuth )
     {
         self::$proxyAuth = $proxyAuth;
     }
 
-    // --------------------------------------------------------------
-    // Logging
-    // --------------------------------------------------------------
-
+    /**
+     * Log events
+     */
     public static function log( $msg, $priority = LOG_INFO )
     {
         if ($priority == LOG_ERR) {
@@ -74,10 +123,9 @@ class Client extends \SoapClient
         closelog();
     }
 
-    // --------------------------------------------------------------
-    // Construct
-    // --------------------------------------------------------------
-
+    /**
+     * Constructor
+     */
     public function __construct( array $service )
     {
         if (false === array_key_exists('endpoint', $service)) {
@@ -96,21 +144,11 @@ class Client extends \SoapClient
         parent::__construct($service['wsdl'], $options);
     }
 
-    // --------------------------------------------------------------
-    // Credits: https://github.com/lmillucci/esempio-fatturapa
-    // --------------------------------------------------------------
-
-    const USER_AGENT = 'Mozilla/4.0 (compatible; MSIE 5.01; Windows NT 5.0)';
-    const REGEX_ENV  = '/<soap[\s\S]*nvelope>/i';
-    const REGEX_XOP  = '/<xop:include[\s\S]*cid:%s@[\s\S]*?<\/xop:Include>/i';
-    const REGEX_CID  = '/cid:([0-9a-zA-Z-]+)@/i';
-    const REGEX_CON  = '/Content-ID:[\s\S].+?%s[\s\S].+?>([\s\S]*?)--MIMEBoundary/i';
-
-    private $lastRequestHeaders;
-    private $lastResponseHeaders;
-    private $lastRequestBody;
-    private $lastResponseBody;
-
+    /**
+     * SOAP client request
+     *
+     * Credits: https://forum.italia.it/u/cesco69
+     */
     public function __doRequest( $request, $location, $action, $version, $one_way = null )
     {
         // reset
@@ -175,8 +213,14 @@ class Client extends \SoapClient
     }
 
     /**
+     * Process response
+     *
+     * Credits: https://forum.italia.it/u/cesco69
+     *
+     * Cesco69:
      * Processa la risposta per supportare il formato MTOM
      * NB teniamo il metodo pubblico per favorire i test unitari
+     *
      * @param string $response
      * @throws \Exception
      * @return string
