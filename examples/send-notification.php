@@ -46,8 +46,10 @@ try
 
     // Process response:
     // ----------------------------------
-    // $result  = $response->Esito;
-    // $discard = $response->ScartoEsito;
+    // $result          = $response->Esito;
+    // $discard         = $response->ScartoEsito;
+    // $discardNomeFile = $discard->NomeFile;
+    // $discardFile     = $discard->File;
     // ----------------------------------
 }
 catch (\Exception $e)
