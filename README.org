@@ -7,6 +7,9 @@ Please refer to
 - [[https://github.com/taocomp/php-sdicoop-invoice][PHP SdICoop - Invoice]] for italian electronic invoice management
 
 * Quickstart
+** Dependencies
+~php-curl~, ~php-soap~
+
 ** Connect to web service "SdIRiceviFile"
 See ~examples/send-invoice.php~.
 
