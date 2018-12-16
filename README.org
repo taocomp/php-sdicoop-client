@@ -12,18 +12,19 @@ See [[https://forum.italia.it/c/fattura-pa][Forum Italia - Fatturazione Elettron
 
 If you need a "ready to start" solution, or a consultancy for your PHP project, please feel free to contact us at [[mailto:e-invoicing@taocomp.com][e-invoicing@taocomp.com]].
 
-* Quickstart
+* Getting started
 ** Dependencies
-~php-curl~, ~php-soap~
+~php-curl~, ~php-soap~.
 
-** Connect to web service "SdIRiceviFile"
+** Send invoices to SdI (web service "SdIRiceviFile")
 See ~examples/send-invoice.php~.
 
-** Connect to web service "SdIRiceviNotifica"
+You can also send ~\Taocomp\EinvoiceIt\FatturaElettronica~ objects: see [[https://github.com/taocomp/php-e-invoice-it][GitHub - taocomp/php-e-invoice-it: A PHP package for managing italian e-invoi...]]
+
+** Send notices to SdI (web service "SdIRiceviNotifica")
 See ~examples/send-notice.php~.
 
-* Getting started
-TODO
+You can also send ~\Taocomp\EinvoiceIt\EsitoCommittente~ objects: see [[https://github.com/taocomp/php-e-invoice-it][GitHub - taocomp/php-e-invoice-it: A PHP package for managing italian e-invoi...]]
 
 * Credits
 We want to thank all contributors of [[https://forum.italia.it/c/fattura-pa][Forum Italia - Fatturazione Elettronica]] who have shared their snippets and any available info.
