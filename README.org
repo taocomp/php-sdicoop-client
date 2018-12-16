@@ -1,10 +1,16 @@
 #+TITLE: PHP SdICoop - Client
 
-Italian e-invoicing: PHP package for connecting to [[https://www.fatturapa.gov.it/export/fatturazione/en/sdi.htm?l=en][Italian Exchange System (SdI - "Sistema di Interscambio")]] web services.
+A PHP package for connecting to [[https://www.fatturapa.gov.it/export/fatturazione/en/sdi.htm?l=en][Italian Exchange System (aka "SdI")]] web services.
 
 Please refer to
 - [[https://github.com/taocomp/php-sdicoop-server][PHP SdICoop - Server]] to implement your web services required by SdI
-- [[https://github.com/taocomp/php-sdicoop-invoice][PHP SdICoop - Invoice]] for italian electronic invoice management
+- [[https://github.com/taocomp/php-e-invoice-it][PHP E-invoice It]] for managing italian e-invoice and notice XML formats
+
+See [[https://forum.italia.it/c/fattura-pa][Forum Italia - Fatturazione Elettronica]] for server configuration, interoperability tests, etc. In particular:
+- Apache configuration :: [[https://forum.italia.it/t/accreditamento-sdicoop-configurazione-ssl-su-apache/3314][Accreditamento SDICoop: configurazione SSL su Apache - Fatturazione Elettroni...]]
+- Interoperability tests :: [[https://forum.italia.it/t/test-interoperabilita-soluzioni/4370][Test Interoperabilità Soluzioni - Fatturazione Elettronica - Forum Italia]]
+
+If you need a "ready to start" solution, or a consultancy for your PHP project, please feel free to contact us at [[mailto:e-invoicing@taocomp.com][e-invoicing@taocomp.com]].
 
 * Quickstart
 ** Dependencies
@@ -18,13 +24,6 @@ See ~examples/send-notification.php~.
 
 * Getting started
 TODO
-
-* Server configuration, interoperability tests and more
-See [[https://forum.italia.it/c/fattura-pa][Forum Italia - Fatturazione Elettronica]] for server configuration, interoperability tests, etc. In particular:
-- Apache configuration :: [[https://forum.italia.it/t/accreditamento-sdicoop-configurazione-ssl-su-apache/3314][Accreditamento SDICoop: configurazione SSL su Apache - Fatturazione Elettroni...]]
-- Interoperability tests :: [[https://forum.italia.it/t/test-interoperabilita-soluzioni/4370][Test Interoperabilità Soluzioni - Fatturazione Elettronica - Forum Italia]]
-
-If you need a "ready to start" solution, or a consultancy for your PHP project, please feel free to contact us at [[mailto:e-invoicing@taocomp.com][e-invoicing@taocomp.com]].
 
 * Credits
 We want to thank all contributors of [[https://forum.italia.it/c/fattura-pa][Forum Italia - Fatturazione Elettronica]] who have shared their snippets and any available info.
