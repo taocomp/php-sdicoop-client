@@ -40,9 +40,9 @@ try
         'wsdl'     => __DIR__ . '/../wsdl/SdIRiceviNotifica_v1.0.wsdl'
     ));
     
-    $notification = new FileSdI();
-    $notification->import(__DIR__ . '/notification.xml');
-    $response = new RispostaSdINotificaEsito($client->NotificaEsito($notification));
+    $fileSdI = new FileSdI();
+    $fileSdI->import(__DIR__ . '/notice.xml');
+    $response = new RispostaSdINotificaEsito($client->NotificaEsito($fileSdI));
 
     // Process response:
     // ----------------------------------

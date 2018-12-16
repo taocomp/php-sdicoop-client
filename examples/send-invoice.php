@@ -40,9 +40,9 @@ try
         'wsdl'     => __DIR__ . '/../wsdl/SdIRiceviFile_v1.0.wsdl'
     ));
     
-    $invoice = new FileSdIBase();
-    $invoice->import(__DIR__ . '/invoice.xml');
-    $response = new RispostaSdIRiceviFile($client->RiceviFile($invoice));
+    $fileSdI = new FileSdIBase();
+    $fileSdI->load(__DIR__ . '/invoice.xml');
+    $response = new RispostaSdIRiceviFile($client->RiceviFile($fileSdI));
 
     // Process response:
     // -----------------------------------------

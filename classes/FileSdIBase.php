@@ -47,15 +47,26 @@ class FileSdIBase
         return "NomeFile:{$this->NomeFile}";
     }
 
+    /**
+     * Deprecated: use load()
+     */
     public function import( string $file )
     {
-        if (false === is_readable($file)) {
-            throw new \Exception("'$file' not found or not readable");
-        }
+        return $this->load($file);
+    }
 
-        $this->NomeFile = basename($file);
-        $this->File = file_get_contents($file);
-        $this->removeBOM();
+    public function load( $invoice )
+    {
+        if ($invoice instanceOf \Taocomp\EinvoiceIt\AbstractDocument) {
+            $this->NomeFile = $invoice->getFilename();
+            $this->File = $invoice->asXML();
+        } else if (true === is_readable($invoice)) {
+            $this->NomeFile = basename($invoice);
+            $this->File = file_get_contents($invoice);
+            $this->removeBOM();
+        } else {
+            throw new \Exception("Invalid file or object '$invoice'");
+        }
 
         return $this;
     }
