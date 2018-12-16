@@ -169,7 +169,10 @@ class Client extends \SoapClient
 
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-        curl_setopt($ch, CURLOPT_SSL_ENABLE_ALPN, false);
+        
+        // https://forum.italia.it/t/sdicoop-configurazione-php-soapclient-soapserver-apache-per-invio-e-ricezione-di-test/5528/85
+        curl_setopt($ch, 226, false);
+        
         curl_setopt($ch, CURLOPT_SSLKEY, self::$privateKey);
         curl_setopt($ch, CURLOPT_SSLCERT, self::$clientCert);
         curl_setopt($ch, CURLOPT_CAINFO, self::$caCert);
