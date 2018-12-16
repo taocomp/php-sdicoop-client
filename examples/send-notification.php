@@ -48,7 +48,7 @@ try
     // ----------------------------------
     // $result          = $response->Esito;
     // $discard         = $response->ScartoEsito;
-    // $discardNomeFile = $discard->NomeFile;
+    // $discardFilename = $discard->NomeFile;
     // $discardFile     = $discard->File;
     // ----------------------------------
 }
