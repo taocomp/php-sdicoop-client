@@ -19,12 +19,12 @@ If you need a "ready to start" solution, or a consultancy for your PHP project, 
 ** Send invoices to SdI (web service "SdIRiceviFile")
 See ~examples/send-invoice.php~.
 
-You can also send ~\Taocomp\EinvoiceIt\FatturaElettronica~ objects: see [[https://github.com/taocomp/php-e-invoice-it][https://github.com/taocomp/php-e-invoice-it]].
+You can also send ~\Taocomp\Einvoicing\FatturaElettronica~ objects: see [[https://github.com/taocomp/php-e-invoice-it][https://github.com/taocomp/php-e-invoice-it]].
 
 ** Send notices to SdI (web service "SdIRiceviNotifica")
 See ~examples/send-notice.php~.
 
-You can also send ~\Taocomp\EinvoiceIt\EsitoCommittente~ objects: see [[https://github.com/taocomp/php-e-invoice-it][https://github.com/taocomp/php-e-invoice-it]].
+You can also send ~\Taocomp\Einvoicing\EsitoCommittente~ objects: see [[https://github.com/taocomp/php-e-invoice-it][https://github.com/taocomp/php-e-invoice-it]].
 
 * Credits
 We want to thank all contributors of [[https://forum.italia.it/c/fattura-pa][Forum Italia - Fatturazione Elettronica]] who have shared their snippets and any available info.

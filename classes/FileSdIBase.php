@@ -57,7 +57,7 @@ class FileSdIBase
 
     public function load( $invoice )
     {
-        if ($invoice instanceOf \Taocomp\EinvoiceIt\AbstractDocument) {
+        if ($invoice instanceOf \Taocomp\Einvoicing\AbstractDocument) {
             $this->NomeFile = $invoice->getFilename();
             $this->File = $invoice->asXML();
         } else if (true === is_readable($invoice)) {
