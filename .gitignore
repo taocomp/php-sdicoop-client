@@ -1,2 +1,6 @@
 examples/*.key
 examples/*.pem
+assets/certs/*
+!assets/certs/.gitkeep
+assets/key/*
+!assets/key/.gitkeep

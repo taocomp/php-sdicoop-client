@@ -34,6 +34,9 @@ class Client extends \SoapClient
     const REGEX_CID  = '/cid:([0-9a-zA-Z-]+)@/i';
     const REGEX_CON  = '/Content-ID:[\s\S].+?%s[\s\S].+?>([\s\S]*?)--MIMEBoundary/i';
 
+    const ENDPOINT = null;
+    const WSDL     = null;
+
     /**
      * Client private key
      */
@@ -126,22 +129,43 @@ class Client extends \SoapClient
     /**
      * Constructor
      */
-    public function __construct( array $service )
+    public function __construct( array $params )
     {
-        if (false === array_key_exists('endpoint', $service)) {
-            throw new \Exception("Cannot find key 'endpoint' in service conf");
-        }
-        if (false === array_key_exists('wsdl', $service)) {
-            throw new \Exception("Cannot find key 'wsdl' in service conf");
+        if (array_key_exists('endpoint', $params)) {
+            $endpoint = $params['endpoint'];
+        } else if (null !== static::ENDPOINT) {
+            $endpoint = static::ENDPOINT;
+        } else {
+            throw new \Exception("Cannot find key 'endpoint'");
         }
 
+        if (array_key_exists('wsdl', $params)) {
+            $wsdl = $params['wsdl'];
+        } else if (null !== static::WSDL) {
+            $wsdl = static::WSDL;
+        } else {
+            throw new \Exception("Cannot find key 'wsdl'");
+        }
+
+        if (array_key_exists('key', $params)) {
+            static::setPrivateKey($params['key']);
+        }
+        
+        if (array_key_exists('cert', $params)) {
+            static::setClientCert($params['cert']);
+        }
+        
+        if (array_key_exists('ca_cert', $params)) {
+            static::setCaCert($params['ca_cert']);
+        }
+        
         $options = array(
-            'location' => $service['endpoint'],
+            'location' => $endpoint,
             'cache_wsdl' => WSDL_CACHE_NONE,
             'trace' => true
         );
         
-        parent::__construct($service['wsdl'], $options);
+        parent::__construct($wsdl, $options);
     }
 
     /**
