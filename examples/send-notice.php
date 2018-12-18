@@ -1,24 +1,5 @@
 <?php
 
-/**
- * Copyright (C) 2018 Taocomp s.r.l.s. <https://taocomp.com>
- *
- * This file is part of php-sdicoop-client.
- *
- * php-sdicoop-client is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * php-sdicoop-client is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with php-sdicoop-client.  If not, see <http://www.gnu.org/licenses/>.
- */
-
 ini_set("soap.wsdl_cache_enabled", 0);
 ini_set('soap.wsdl_cache_ttl', 0);
 
@@ -35,9 +16,13 @@ try
         'cert'    => __DIR__ . '/../assets/certs/client.pem',
         'ca_cert' => __DIR__ . '/../assets/certs/ca.pem'
     ));
+
+    // Verbose (default: false)
+    TestSdiRiceviNotifica::$verbose = true;
     
     $fileSdI = new FileSdI();
-    $fileSdI->import(__DIR__ . '/notice.xml');
+    $fileSdI->load(__DIR__ . '/notice.xml');
+
     $response = new RispostaSdINotificaEsito($client->NotificaEsito($fileSdI));
 
     // Process response:
@@ -50,5 +35,5 @@ try
 }
 catch (\Exception $e)
 {
-    Client::log($e->getMessage(), LOG_ERR);
+    TestSdiRiceviNotifica::log($e->getMessage(), LOG_ERR);
 }

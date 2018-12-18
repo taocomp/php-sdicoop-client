@@ -63,6 +63,11 @@ class Client extends \SoapClient
     protected static $proxyAuth = null;
 
     /**
+     * Debug
+     */
+    public static $verbose = false;
+
+    /**
      * SOAP client last request/response headers/body
      *
      * Credits: https://forum.italia.it/u/cesco69
@@ -190,6 +195,10 @@ class Client extends \SoapClient
         $this->lastRequestBody = $request;
 
         $ch = curl_init();
+
+        if (true === static::$verbose) {
+            curl_setopt($ch, CURLOPT_VERBOSE, true);
+        }
 
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);

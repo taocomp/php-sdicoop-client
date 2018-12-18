@@ -82,7 +82,7 @@ Setup client:
 Send notice:
 #+BEGIN_SRC 
     $fileSdI = new FileSdI();
-    $fileSdI->import(__DIR__ . '/notice.xml');
+    $fileSdI->load(__DIR__ . '/notice.xml');
     $response = new RispostaSdINotificaEsito($client->NotificaEsito($fileSdI));
 
     // Process response:
