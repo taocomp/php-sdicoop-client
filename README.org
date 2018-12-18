@@ -44,14 +44,11 @@ or:
     Client::setPrivateKey(__DIR__ . '/client.key');
     Client::setClientCert(__DIR__ . '/client.pem');
     Client::setCaCert(__DIR__ . '/ca.pem');
+
     $client = new Client(array(
         'endpoint' => 'https://testservizi.fatturapa.it/ricevi_file',
         'wsdl'     => __DIR__ . '/../wsdl/SdIRiceviFile_v1.0.wsdl'
     ));
-    
-    $fileSdI = new FileSdIBase();
-    $fileSdI->load(__DIR__ . '/invoice.xml');
-    $response = new RispostaSdIRiceviFile($client->RiceviFile($fileSdI));
 #+END_SRC
 
 Send invoice:
