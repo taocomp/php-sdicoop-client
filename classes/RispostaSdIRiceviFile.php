@@ -19,7 +19,7 @@
  * along with php-sdicoop-client.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Taocomp\Sdicoop;
+namespace Taocomp\Einvoicing\Sdicoop;
 
 class RispostaSdIRiceviFile
 {
