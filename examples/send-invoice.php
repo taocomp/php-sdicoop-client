@@ -17,6 +17,9 @@ try
         'ca_cert' => __DIR__ . '/../assets/certs/ca.pem'
     ));
     
+    // Verbose (default: false)
+    TestSdiRiceviFile::$verbose = false;
+    
     $fileSdI = new FileSdIBase();
     $fileSdI->load(__DIR__ . '/invoice.xml');
     $response = new RispostaSdIRiceviFile($client->RiceviFile($fileSdI));

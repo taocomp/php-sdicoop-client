@@ -3,6 +3,7 @@
 ini_set("soap.wsdl_cache_enabled", 0);
 ini_set('soap.wsdl_cache_ttl', 0);
 
+use \Taocomp\Einvoicing\Sdicoop\Client;
 use \Taocomp\Einvoicing\Sdicoop\TestSdiRiceviNotifica;
 use \Taocomp\Einvoicing\Sdicoop\FileSdI;
 use \Taocomp\Einvoicing\Sdicoop\RispostaSdINotificaEsito;
@@ -18,11 +19,10 @@ try
     ));
 
     // Verbose (default: false)
-    TestSdiRiceviNotifica::$verbose = true;
+    TestSdiRiceviNotifica::$verbose = false;
     
     $fileSdI = new FileSdI();
     $fileSdI->load(__DIR__ . '/notice.xml');
-
     $response = new RispostaSdINotificaEsito($client->NotificaEsito($fileSdI));
 
     // Process response:
