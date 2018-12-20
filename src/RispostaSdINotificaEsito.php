@@ -36,7 +36,9 @@ class RispostaSdINotificaEsito
     public function __construct( \StdClass $obj )
     {
         $this->Esito = $obj->Esito;
-        $this->ScartoEsito = new FileSdIBase($obj->ScartoEsito);
+        if (true === property_exists($obj->ScartoEsito)) {
+            $this->ScartoEsito = new FileSdIBase($obj->ScartoEsito);
+        }
 
         Client::log($this);
     }
@@ -44,8 +46,13 @@ class RispostaSdINotificaEsito
     public function __toString()
     {
         $classArray = explode('\\', __CLASS__);
-        return array_pop($classArray)
-            . " Esito:{$this->Esito}"
-            . " NomeFile:{$this->ScartoEsito->NomeFile}";
+        $str = array_pop($classArray)
+             . " Esito:{$this->Esito}";
+
+        if (null !== $this->ScartoEsito) {
+            $str .= " ScartoEsito->NomeFile:{$this->ScartoEsito->NomeFile}";
+        }
+        
+        return $str;
     }
 }
