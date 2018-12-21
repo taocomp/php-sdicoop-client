@@ -33,7 +33,7 @@ class RispostaSdINotificaEsito
     public $Esito = null;
     public $ScartoEsito = null;
 
-    public function __construct( \StdClass $obj )
+    public function __construct( $obj )
     {
         $this->Esito = $obj->Esito;
         if (true === property_exists($obj->ScartoEsito)) {

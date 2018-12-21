@@ -26,7 +26,7 @@ class FileSdIBase
     public $NomeFile = null;
     public $File = null;
 
-    public function __construct( \StdClass $parametersIn = null )
+    public function __construct( $parametersIn = null )
     {
         if ($parametersIn) {
             if (!property_exists($parametersIn, 'NomeFile')) {
@@ -50,7 +50,7 @@ class FileSdIBase
     /**
      * Deprecated: use load()
      */
-    public function import( string $file )
+    public function import( $file )
     {
         return $this->load($file);
     }

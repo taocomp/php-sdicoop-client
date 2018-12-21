@@ -80,7 +80,7 @@ class Client extends \SoapClient
     /**
      * Set private key
      */
-    public static function setPrivateKey( string $file )
+    public static function setPrivateKey( $file )
     {
         self::$privateKey = $file;
     }
@@ -88,7 +88,7 @@ class Client extends \SoapClient
     /**
      * Set client cert
      */
-    public static function setClientCert( string $file )
+    public static function setClientCert( $file )
     {
         self::$clientCert = $file;
     }
@@ -96,7 +96,7 @@ class Client extends \SoapClient
     /**
      * Set CA cert
      */
-    public static function setCaCert( string $file )
+    public static function setCaCert( $file )
     {
         self::$caCert = $file;
     }
@@ -104,7 +104,7 @@ class Client extends \SoapClient
     /**
      * Set proxy URL, if any
      */
-    public static function setProxyUrl( string $proxyUrl )
+    public static function setProxyUrl( $proxyUrl )
     {
         self::$proxyUrl = $proxyUrl;
     }
@@ -112,7 +112,7 @@ class Client extends \SoapClient
     /**
      * Set proxy authentication, if any
      */
-    public static function setProxyAuth( string $proxyAuth )
+    public static function setProxyAuth( $proxyAuth )
     {
         self::$proxyAuth = $proxyAuth;
     }
@@ -134,7 +134,7 @@ class Client extends \SoapClient
     /**
      * Constructor
      */
-    public function __construct( array $params )
+    public function __construct( $params = array() )
     {
         if (array_key_exists('endpoint', $params)) {
             $endpoint = $params['endpoint'];

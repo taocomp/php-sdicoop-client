@@ -27,7 +27,7 @@ class RispostaSdIRiceviFile
     public $DataOraRicezione = null;
     public $Errore = null;
 
-    public function __construct(\StdClass $obj)
+    public function __construct( $obj )
     {
         $this->IdentificativoSdI = $obj->IdentificativoSdI;
         $this->DataOraRicezione = $obj->DataOraRicezione;

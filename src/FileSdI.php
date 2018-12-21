@@ -25,7 +25,7 @@ class FileSdI extends FileSdIBase
 {
     public $IdentificativoSdI = null;
 
-    public function __construct( \StdClass $parametersIn = null )
+    public function __construct( $parametersIn = null )
     {
         parent::__construct($parametersIn);
 
@@ -58,7 +58,7 @@ class FileSdI extends FileSdIBase
         return $this;
     }
 
-    public function import( string $file )
+    public function import( $file )
     {
         return $this->load($file);
     }
