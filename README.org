@@ -38,7 +38,7 @@ Client::setCaCert('/path/to/ca.pem');
 
 And then you can instantiate the client by providing endpoint/WSDL.
 
-Web service ~SdIRiceviFile~ (test) for sendind invoices:
+Web service ~SdIRiceviFile~ (test) for sending invoices:
 #+BEGIN_SRC 
 $client = new Client(array(
     'endpoint' => 'https://testservizi.fatturapa.it/ricevi_file',
