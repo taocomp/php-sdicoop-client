@@ -14,7 +14,10 @@ If you need a "ready to start" solution, or a consultancy for your PHP project, 
 
 * Getting started
 ** Dependencies
-~php-curl~, ~php-soap~.
+- ~php-curl~
+- ~php-soap~
+
+Compatible with PHP 5.5+.
 
 ** Send invoices to SdI (web service "SdIRiceviFile", endpoint test)
 Setup client:
@@ -98,6 +101,8 @@ You can also send ~\Taocomp\Einvoicing\EsitoCommittente~ objects: see [[https://
 
 * Credits
 We want to thank all contributors of [[https://forum.italia.it/c/fattura-pa][Forum Italia - Fatturazione Elettronica]] who have shared their snippets and any available info.
+
+Thanks to Luca Cristofalo for testing the code on his old PHP 5.5.38. :-)
 
 * License
 GPLv3.

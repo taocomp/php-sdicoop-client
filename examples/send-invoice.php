@@ -26,9 +26,16 @@ try
 
     // Process response:
     // -----------------------------------------
-    // $id       = $response->IdentificativoSdI;
-    // $datetime = $response->DataOraRicezione;
-    // $error    = $response->Errore;
+    $id       = $response->IdentificativoSdI;
+    $datetime = $response->DataOraRicezione;
+    $error    = $response->Errore;
+    echo PHP_EOL;
+    echo "IdentificativoSdI: $id" . PHP_EOL;
+    echo "DataOraRicezione : $datetime" . PHP_EOL;
+    if (false === empty($error)) {
+        echo "Errore           : $error" . PHP_EOL;
+    }
+    echo PHP_EOL;
     // -----------------------------------------
 }
 catch (\Exception $e)

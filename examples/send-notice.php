@@ -27,10 +27,13 @@ try
 
     // Process response:
     // ----------------------------------
-    // $result          = $response->Esito;
+    $result          = $response->Esito;
     // $discard         = $response->ScartoEsito;
     // $discardFilename = $discard->NomeFile;
     // $discardFile     = $discard->File;
+    echo PHP_EOL;
+    echo "Esito: $result" . PHP_EOL;
+    echo PHP_EOL;
     // ----------------------------------
 }
 catch (\Exception $e)
