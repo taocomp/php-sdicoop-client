@@ -79,12 +79,14 @@ $response = new RispostaSdIRiceviFile($client->RiceviFile($fileSdI));
 // -----------------------------------------
 #+END_SRC
 
+See ~examples/invoice.php~ for a working example.
+
 You can also send ~\Taocomp\Einvoicing\FatturaElettronica~ objects: see [[https://github.com/taocomp/php-e-invoice-it][https://github.com/taocomp/php-e-invoice-it]].
 
 ** Send notices to SdI (web service "SdIRiceviNotifica", endpoint test)
 #+BEGIN_SRC 
 $fileSdI = new FileSdI();
-$fileSdI->load(__DIR__ . '/notice.xml');
+$fileSdI->load('/path/to/notice.xml');
 $response = new RispostaSdINotificaEsito($client->NotificaEsito($fileSdI));
 
 // Process response:
@@ -95,6 +97,8 @@ $response = new RispostaSdINotificaEsito($client->NotificaEsito($fileSdI));
 // $discardFile     = $discard->File;
 // ----------------------------------
 #+END_SRC
+
+See ~examples/notice.php~ for a working example.
 
 You can also send ~\Taocomp\Einvoicing\EsitoCommittente~ objects: see [[https://github.com/taocomp/php-e-invoice-it][https://github.com/taocomp/php-e-invoice-it]].
 

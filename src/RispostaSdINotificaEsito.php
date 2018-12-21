@@ -36,7 +36,7 @@ class RispostaSdINotificaEsito
     public function __construct( $obj )
     {
         $this->Esito = $obj->Esito;
-        if (true === property_exists($obj->ScartoEsito)) {
+        if (true === property_exists($obj, 'ScartoEsito')) {
             $this->ScartoEsito = new FileSdIBase($obj->ScartoEsito);
         }
 
