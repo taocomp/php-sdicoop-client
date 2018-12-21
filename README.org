@@ -16,87 +16,84 @@ If you need a "ready to start" solution, or a consultancy for your PHP project, 
 
 * Getting started
 ** Dependencies
+- PHP >=5.5
 - ~php-curl~
 - ~php-soap~
 
-Compatible with PHP 5.5+.
+** Setup
+According to Italian Exchange System (aka SdI), you need:
+- a client key
+- a client certificate
+- a CA certificate
+to send invoices and notices to SdI web services.
 
-** Send invoices to SdI (web service "SdIRiceviFile", endpoint test)
-Setup client:
+Additionally you must provide an endpoint to connect to and the correspondent WSDL for each web service.
+
+You can configure key and certs as follow:
 #+BEGIN_SRC 
-    $client = new TestSdiRiceviFile(array(
-        'key'     => __DIR__ . '/../assets/key/client.key',
-        'cert'    => __DIR__ . '/../assets/certs/client.pem',
-        'ca_cert' => __DIR__ . '/../assets/certs/ca.pem'
-    ));
+Client::setPrivateKey('/path/to/client.key');
+Client::setClientCert('/path/to/client.pem');
+Client::setCaCert('/path/to/ca.pem');
 #+END_SRC
 
-or:
+And then you can instantiate the client by providing endpoint/WSDL.
 
+Web service ~SdIRiceviFile~ (test) for sendind invoices:
 #+BEGIN_SRC 
-    // Set certs and key
-    Client::setPrivateKey('/path/to/client.key');
-    Client::setClientCert('/path/to/client.pem');
-    Client::setCaCert('/path/to/ca.pem');
-
-    $client = new TestSdiRiceviFile();
+$client = new Client(array(
+    'endpoint' => 'https://testservizi.fatturapa.it/ricevi_file',
+    'wsdl'     => '/path/to/php-sdicoop-client/assets/wsdl/SdIRiceviFile_v1.0.wsdl'
+));
 #+END_SRC
 
-or (for PHP 5.5+):
-
+Web service ~SdIRiceviNotifica~ (test) for sending notices:
 #+BEGIN_SRC 
-    // Set certs and key
-    Client::setPrivateKey(__DIR__ . '/client.key');
-    Client::setClientCert(__DIR__ . '/client.pem');
-    Client::setCaCert(__DIR__ . '/ca.pem');
-
-    $client = new Client(array(
-        'endpoint' => 'https://testservizi.fatturapa.it/ricevi_file',
-        'wsdl'     => __DIR__ . '/../wsdl/SdIRiceviFile_v1.0.wsdl'
-    ));
+$client = new Client(array(
+    'endpoint' => 'https://testservizi.fatturapa.it/ricevi_notifica',
+    'wsdl'     => '/path/to/php-sdicoop-client/assets/wsdl/SdIRiceviNotifica_v1.0.wsdl'
+));
 #+END_SRC
 
-Send invoice:
+Or you can pass all parameters (key, certs, wsdl, endpoint) to client constructor:
 #+BEGIN_SRC 
-    $fileSdI = new FileSdIBase();
-    $fileSdI->load(__DIR__ . '/invoice.xml');
-    $response = new RispostaSdIRiceviFile($client->RiceviFile($fileSdI));
+$client = new Client(array(
+    'key'      => '/path/to/client.key',
+    'cert'     => '/path/to/client.pem',
+    'ca_cert'  => '/path/to/ca.pem',
+    'endpoint' => 'https://testservizi.fatturapa.it/ricevi_file',
+    'wsdl'     => '/path/to/php-sdicoop-client/assets/wsdl/SdIRiceviFile_v1.0.wsdl'
+));
+#+END_SRC
 
-    // Process response:
-    // -----------------------------------------
-    // $id       = $response->IdentificativoSdI;
-    // $datetime = $response->DataOraRicezione;
-    // $error    = $response->Errore;
-    // -----------------------------------------
+** Send invoices to SdI (web service "SdIRiceviFile")
+#+BEGIN_SRC 
+$fileSdI = new FileSdIBase();
+$fileSdI->load('/path/to/invoice.xml');
+$response = new RispostaSdIRiceviFile($client->RiceviFile($fileSdI));
+
+// Process response:
+// -----------------------------------------
+// $id       = $response->IdentificativoSdI;
+// $datetime = $response->DataOraRicezione;
+// $error    = $response->Errore;
+// -----------------------------------------
 #+END_SRC
 
 You can also send ~\Taocomp\Einvoicing\FatturaElettronica~ objects: see [[https://github.com/taocomp/php-e-invoice-it][https://github.com/taocomp/php-e-invoice-it]].
 
 ** Send notices to SdI (web service "SdIRiceviNotifica", endpoint test)
-Setup client:
 #+BEGIN_SRC 
-    $client = new TestSdiRiceviNotifica(array(
-        'key'     => __DIR__ . '/../assets/key/client.key',
-        'cert'    => __DIR__ . '/../assets/certs/client.pem',
-        'ca_cert' => __DIR__ . '/../assets/certs/ca.pem'
-    ));
-#+END_SRC
+$fileSdI = new FileSdI();
+$fileSdI->load(__DIR__ . '/notice.xml');
+$response = new RispostaSdINotificaEsito($client->NotificaEsito($fileSdI));
 
-(see "Send invoices" for different client instantiations).
-
-Send notice:
-#+BEGIN_SRC 
-    $fileSdI = new FileSdI();
-    $fileSdI->load(__DIR__ . '/notice.xml');
-    $response = new RispostaSdINotificaEsito($client->NotificaEsito($fileSdI));
-
-    // Process response:
-    // ----------------------------------
-    // $result          = $response->Esito;
-    // $discard         = $response->ScartoEsito;
-    // $discardFilename = $discard->NomeFile;
-    // $discardFile     = $discard->File;
-    // ----------------------------------
+// Process response:
+// ----------------------------------
+// $result          = $response->Esito;
+// $discard         = $response->ScartoEsito;
+// $discardFilename = $discard->NomeFile;
+// $discardFile     = $discard->File;
+// ----------------------------------
 #+END_SRC
 
 You can also send ~\Taocomp\Einvoicing\EsitoCommittente~ objects: see [[https://github.com/taocomp/php-e-invoice-it][https://github.com/taocomp/php-e-invoice-it]].
