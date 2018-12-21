@@ -2,7 +2,7 @@
     "name": "taocomp/php-sdicoop-client",
     "description": "A PHP package for connecting to Italian Exchange System (aka SdI) web services",
     "require": {
-        "php": ">=5.5"
+        "php": "^7"
     },
     "autoload": {
         "psr-4": {"Taocomp\\Einvoicing\\Sdicoop\\": "src/"}
