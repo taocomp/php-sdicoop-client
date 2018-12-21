@@ -22,7 +22,7 @@ try
     ));
     
     // Verbose (default: false)
-    // Client::$verbose = false;
+    // $client->setVerbose(true);
     
     $fileSdI = new FileSdIBase();
     $fileSdI->load(__DIR__ . '/invoice.xml');

@@ -63,9 +63,9 @@ class Client extends \SoapClient
     protected static $proxyAuth = null;
 
     /**
-     * Debug
+     * Verbosity
      */
-    public static $verbose = false;
+    protected $verbose = false;
 
     /**
      * SOAP client last request/response headers/body
@@ -174,6 +174,18 @@ class Client extends \SoapClient
     }
 
     /**
+     * Set CURL verbosity
+     */
+    public function setVerbose( $verbose = true )
+    {
+        if (false === is_bool($verbose)) {
+            throw new \Exception('Verbose param must be boolean');
+        }
+        $this->verbose = $verbose;
+        return $this;
+    }
+
+    /**
      * SOAP client request
      *
      * Credits: https://forum.italia.it/u/cesco69
@@ -196,9 +208,7 @@ class Client extends \SoapClient
 
         $ch = curl_init();
 
-        if (true === static::$verbose) {
-            curl_setopt($ch, CURLOPT_VERBOSE, true);
-        }
+        curl_setopt($ch, CURLOPT_VERBOSE, $this->verbose);
 
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
