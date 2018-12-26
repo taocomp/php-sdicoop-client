@@ -29,6 +29,14 @@ composer require taocomp/php-sdicoop-client
 - Clone/download the repository
 - ~require_once('/path/to/php-sdicoop-client/vendor/autoload.php');~
 
+*** Namespaces
+Please note namespace is changed (v0.1.5), it is now ~Taocomp\Einvoicing\SdicoopClient~.
+
+So to use e.g. ~Client~ class:
+#+BEGIN_SRC 
+use \Taocomp\Einvoicing\SdicoopClient\Client;
+#+END_SRC
+
 ** Setup
 According to Italian Exchange System (aka SdI), you need:
 - a client key
@@ -43,6 +51,12 @@ You can configure key and certs as follow:
 Client::setPrivateKey('/path/to/client.key');
 Client::setClientCert('/path/to/client.pem');
 Client::setCaCert('/path/to/ca.pem');
+#+END_SRC
+
+You can also configure a proxy if needed:
+#+BEGIN_SRC 
+Client::setProxyUrl('proxy_url');
+Client::setProxyAuth('username:password');
 #+END_SRC
 
 And then you can instantiate the client by providing endpoint/WSDL.

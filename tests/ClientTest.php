@@ -1,6 +1,6 @@
 <?php
 use PHPUnit\Framework\TestCase;
-use Taocomp\Einvoicing\Sdicoop\Client;
+use Taocomp\Einvoicing\SdicoopClient\Client;
 
 class ClientTest extends TestCase
 {

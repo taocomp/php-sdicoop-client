@@ -19,13 +19,13 @@
  * along with php-sdicoop-client.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Taocomp\Einvoicing\Sdicoop;
+namespace Taocomp\Einvoicing\SdicoopClient;
 
 class FileSdI extends FileSdIBase
 {
     public $IdentificativoSdI = null;
 
-    public function __construct( $parametersIn = null )
+    public function __construct( \StdClass $parametersIn = null )
     {
         parent::__construct($parametersIn);
 

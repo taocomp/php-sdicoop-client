@@ -19,7 +19,7 @@
  * along with php-sdicoop-client.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Taocomp\Einvoicing\Sdicoop;
+namespace Taocomp\Einvoicing\SdicoopClient;
 
 class Client extends \SoapClient
 {

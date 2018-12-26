@@ -1,6 +1,6 @@
 <?php
 use PHPUnit\Framework\TestCase;
-use Taocomp\Einvoicing\Sdicoop\FileSdIBase;
+use Taocomp\Einvoicing\SdicoopClient\FileSdIBase;
 
 class FileSdIBaseTest extends TestCase
 {
@@ -13,7 +13,7 @@ class FileSdIBaseTest extends TestCase
 
     public function testCannotCreateWithInvalidArg()
     {
-        $this->expectException(\Exception::class);
+        $this->expectException(\TypeError::class);
 
         $obj = new FileSdIBase('BAD');
     }

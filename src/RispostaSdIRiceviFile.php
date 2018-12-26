@@ -19,7 +19,7 @@
  * along with php-sdicoop-client.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Taocomp\Einvoicing\Sdicoop;
+namespace Taocomp\Einvoicing\SdicoopClient;
 
 class RispostaSdIRiceviFile
 {
@@ -27,7 +27,7 @@ class RispostaSdIRiceviFile
     public $DataOraRicezione = null;
     public $Errore = null;
 
-    public function __construct( $obj )
+    public function __construct( \StdClass $obj )
     {
         $this->IdentificativoSdI = $obj->IdentificativoSdI;
         $this->DataOraRicezione = $obj->DataOraRicezione;

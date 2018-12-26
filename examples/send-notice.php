@@ -3,9 +3,9 @@
 ini_set("soap.wsdl_cache_enabled", 0);
 ini_set('soap.wsdl_cache_ttl', 0);
 
-use \Taocomp\Einvoicing\Sdicoop\Client;
-use \Taocomp\Einvoicing\Sdicoop\FileSdI;
-use \Taocomp\Einvoicing\Sdicoop\RispostaSdINotificaEsito;
+use \Taocomp\Einvoicing\SdicoopClient\Client;
+use \Taocomp\Einvoicing\SdicoopClient\FileSdI;
+use \Taocomp\Einvoicing\SdicoopClient\RispostaSdINotificaEsito;
 
 try
 {

@@ -19,7 +19,7 @@
  * along with php-sdicoop-client.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Taocomp\Einvoicing\Sdicoop;
+namespace Taocomp\Einvoicing\SdicoopClient;
 
 class RispostaSdINotificaEsito
 {
@@ -33,7 +33,7 @@ class RispostaSdINotificaEsito
     public $Esito = null;
     public $ScartoEsito = null;
 
-    public function __construct( $obj )
+    public function __construct( \StdClass $obj )
     {
         $this->Esito = $obj->Esito;
         if (true === property_exists($obj, 'ScartoEsito')) {
