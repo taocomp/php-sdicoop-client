@@ -55,11 +55,11 @@ class FileSdIBase
         return $this->load($file);
     }
 
-    public function load( $invoice, string $contents = null )
+    public function load( $invoice, $contents = null )
     {
         // Passing contents as param
         // TODO verify $contents is valid xml
-        if (null !== $contents) {
+        if (null !== $contents && is_string($contents)) {
             $this->NomeFile = $invoice;
             $this->File = $contents;
             $this->removeBOM();
