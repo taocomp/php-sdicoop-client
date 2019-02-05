@@ -55,8 +55,18 @@ class FileSdIBase
         return $this->load($file);
     }
 
-    public function load( $invoice )
+    public function load( $invoice, string $contents = null )
     {
+        // Passing contents as param
+        // TODO verify $contents is valid xml
+        if (null !== $contents) {
+            $this->NomeFile = $invoice;
+            $this->File = $contents;
+            $this->removeBOM();
+
+            return $this;
+        }
+
         if ($invoice instanceOf \Taocomp\Einvoicing\AbstractDocument) {
             $this->NomeFile = $invoice->getFilename();
             $this->File = $invoice->asXML();

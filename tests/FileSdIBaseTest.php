@@ -53,4 +53,17 @@ class FileSdIBaseTest extends TestCase
 
         $this->assertFalse(empty($obj->File));
     }
+
+    public function testCanLoadContents()
+    {
+        $obj = new FileSdIBase();
+        $contents = file_get_contents(__DIR__ . '/files/invoice.xml');
+        $obj->load('myfile.xml', $contents);
+
+        $xml = new SimpleXMLElement($obj->File);
+        $CD = $xml->FatturaElettronicaHeader->DatiTrasmissione->CodiceDestinatario;
+
+        // TODO: test XML contents too
+        $this->assertEquals('myfile.xml ABC1234', $obj->NomeFile . " $CD");
+    }
 }

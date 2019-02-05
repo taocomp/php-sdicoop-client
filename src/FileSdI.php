@@ -43,9 +43,9 @@ class FileSdI extends FileSdIBase
         return "IdentificativoSdI:{$this->IdentificativoSdI} " . parent::__toString();
     }
 
-    public function load( $file )
+    public function load( $file, string $contents = null )
     {
-        parent::load($file);
+        parent::load($file, $contents);
 
         $xml = simplexml_load_file($file);
 
