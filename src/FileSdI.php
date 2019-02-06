@@ -47,7 +47,9 @@ class FileSdI extends FileSdIBase
     {
         parent::load($file, $contents);
 
-        $xml = simplexml_load_file($file);
+        $xml = null === $contents
+             ? simplexml_load_file($file)
+             : simplexml_load_string($contents);
 
         if (!property_exists($xml, 'IdentificativoSdI')) {
             throw new \Exception("Cannot find 'IdentificativoSdI' in '$file'");

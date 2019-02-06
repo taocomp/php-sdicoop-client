@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<types:NotificaEsitoCommittente xmlns:types="http://www.fatturapa.gov.it/sdi/messaggi/v1.0" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" versione="1.0" xsi:schemaLocation="http://www.fatturapa.gov.it/sdi/messaggi/v1.0 MessaggiTypes_v1.0.xsd ">
+    <IdentificativoSdI>1234567</IdentificativoSdI>
+    <RiferimentoFattura>
+        <NumeroFattura>NUM_FATTURA</NumeroFattura>
+        <AnnoFattura>2018</AnnoFattura>
+        <PosizioneFattura>1</PosizioneFattura>
+    </RiferimentoFattura>
+    <Esito>EC02</Esito>
+    <Descrizione>Esempio</Descrizione>
+    <MessageIdCommittente>MESSAGE_ID</MessageIdCommittente>
+</types:NotificaEsitoCommittente>
