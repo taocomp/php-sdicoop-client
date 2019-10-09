@@ -43,6 +43,11 @@ class Client extends \SoapClient
     protected static $privateKey = null;
 
     /**
+     * CA certificate
+     */
+    protected static $privateKeyPassword = null;
+
+    /**
      * Client certificate
      */
     protected static $clientCert = null;
@@ -84,7 +89,15 @@ class Client extends \SoapClient
     {
         self::$privateKey = $file;
     }
-    
+
+    /**
+     * Set private key
+     */
+    public static function setPrivateKeyPassword( $password )
+    {
+        self::$privateKeyPassword = $password;
+    }
+
     /**
      * Set client cert
      */
@@ -92,7 +105,7 @@ class Client extends \SoapClient
     {
         self::$clientCert = $file;
     }
-    
+
     /**
      * Set CA cert
      */
@@ -155,21 +168,25 @@ class Client extends \SoapClient
         if (array_key_exists('key', $params)) {
             static::setPrivateKey($params['key']);
         }
-        
+
+        if (array_key_exists('keyPassword', $params)) {
+            static::setPrivateKeyPassword($params['keyPassword']);
+        }
+
         if (array_key_exists('cert', $params)) {
             static::setClientCert($params['cert']);
         }
-        
+
         if (array_key_exists('ca_cert', $params)) {
             static::setCaCert($params['ca_cert']);
         }
-        
+
         $options = array(
             'location' => $endpoint,
             'cache_wsdl' => WSDL_CACHE_NONE,
             'trace' => true
         );
-        
+
         parent::__construct($wsdl, $options);
     }
 
@@ -212,11 +229,14 @@ class Client extends \SoapClient
 
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-        
+
         // https://forum.italia.it/t/sdicoop-configurazione-php-soapclient-soapserver-apache-per-invio-e-ricezione-di-test/5528/85
         curl_setopt($ch, 226, false);
-        
+
         curl_setopt($ch, CURLOPT_SSLKEY, self::$privateKey);
+        if (self::$privateKeyPassword != null) {
+            curl_setopt($ch, CURLOPT_SSLKEYPASSWD, self::$privateKeyPassword);
+        }
         curl_setopt($ch, CURLOPT_SSLCERT, self::$clientCert);
         curl_setopt($ch, CURLOPT_CAINFO, self::$caCert);
 
