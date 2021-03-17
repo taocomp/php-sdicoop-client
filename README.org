@@ -12,8 +12,6 @@ See [[https://forum.italia.it/c/fattura-pa][Forum Italia - Fatturazione Elettron
 - Apache configuration :: [[https://forum.italia.it/t/accreditamento-sdicoop-configurazione-ssl-su-apache/3314][Accreditamento SDICoop: configurazione SSL su Apache - Fatturazione Elettroni...]]
 - Interoperability tests :: [[https://forum.italia.it/t/test-interoperabilita-soluzioni/4370][Test Interoperabilità Soluzioni - Fatturazione Elettronica - Forum Italia]]
 
-If you need a "ready to start" solution, or a consultancy for your PHP project, please feel free to contact us at [[mailto:e-invoicing@taocomp.com][e-invoicing@taocomp.com]].
-
 * Getting started
 ** Dependencies
 - PHP >=5.5
@@ -21,7 +19,7 @@ If you need a "ready to start" solution, or a consultancy for your PHP project, 
 - ~php-soap~
 ** Install
 *** Composer
-#+BEGIN_SRC 
+#+BEGIN_SRC
 composer require taocomp/php-sdicoop-client
 #+END_SRC
 
@@ -33,7 +31,7 @@ composer require taocomp/php-sdicoop-client
 Please note namespace is changed (v0.1.5), it is now ~Taocomp\Einvoicing\SdicoopClient~.
 
 So to use e.g. ~Client~ class:
-#+BEGIN_SRC 
+#+BEGIN_SRC
 use \Taocomp\Einvoicing\SdicoopClient\Client;
 #+END_SRC
 
@@ -47,14 +45,14 @@ to send invoices and notices to SdI web services.
 Additionally you must provide an endpoint to connect to and the correspondent WSDL for each web service.
 
 You can configure key and certs as follow:
-#+BEGIN_SRC 
+#+BEGIN_SRC
 Client::setPrivateKey('/path/to/client.key');
 Client::setClientCert('/path/to/client.pem');
 Client::setCaCert('/path/to/ca.pem');
 #+END_SRC
 
 You can also configure a proxy if needed:
-#+BEGIN_SRC 
+#+BEGIN_SRC
 Client::setProxyUrl('proxy_url');
 Client::setProxyAuth('username:password');
 #+END_SRC
@@ -62,7 +60,7 @@ Client::setProxyAuth('username:password');
 And then you can instantiate the client by providing endpoint/WSDL.
 
 Web service ~SdIRiceviFile~ (test) for sending invoices:
-#+BEGIN_SRC 
+#+BEGIN_SRC
 $client = new Client(array(
     'endpoint' => 'https://testservizi.fatturapa.it/ricevi_file',
     'wsdl'     => '/path/to/php-sdicoop-client/assets/wsdl/SdIRiceviFile_v1.0.wsdl'
@@ -70,7 +68,7 @@ $client = new Client(array(
 #+END_SRC
 
 Web service ~SdIRiceviNotifica~ (test) for sending notices:
-#+BEGIN_SRC 
+#+BEGIN_SRC
 $client = new Client(array(
     'endpoint' => 'https://testservizi.fatturapa.it/ricevi_notifica',
     'wsdl'     => '/path/to/php-sdicoop-client/assets/wsdl/SdIRiceviNotifica_v1.0.wsdl'
@@ -78,7 +76,7 @@ $client = new Client(array(
 #+END_SRC
 
 Or you can pass all parameters (key, certs, wsdl, endpoint) to client constructor:
-#+BEGIN_SRC 
+#+BEGIN_SRC
 $client = new Client(array(
     'key'      => '/path/to/client.key',
     'cert'     => '/path/to/client.pem',
@@ -89,7 +87,7 @@ $client = new Client(array(
 #+END_SRC
 
 ** Send invoices to SdI (web service "SdIRiceviFile")
-#+BEGIN_SRC 
+#+BEGIN_SRC
 $fileSdI = new FileSdIBase();
 $fileSdI->load('/path/to/invoice.xml');
 $response = new RispostaSdIRiceviFile($client->RiceviFile($fileSdI));
@@ -107,7 +105,7 @@ See ~examples/invoice.php~ for a working example.
 You can also send ~\Taocomp\Einvoicing\FatturaElettronica~ objects: see [[https://github.com/taocomp/php-e-invoice-it][https://github.com/taocomp/php-e-invoice-it]].
 
 ** Send notices to SdI (web service "SdIRiceviNotifica", endpoint test)
-#+BEGIN_SRC 
+#+BEGIN_SRC
 $fileSdI = new FileSdI();
 $fileSdI->load('/path/to/notice.xml');
 $response = new RispostaSdINotificaEsito($client->NotificaEsito($fileSdI));
