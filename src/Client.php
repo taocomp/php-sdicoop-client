@@ -190,7 +190,7 @@ class Client extends \SoapClient
      *
      * Credits: https://forum.italia.it/u/cesco69
      */
-    public function __doRequest( $request, $location, $action, $version, $one_way = null )
+    public function __doRequest( $request, $location, $action, $version, $one_way = null ): string
     {
         // reset
         $this->lastResponseBody = '';
@@ -327,22 +327,22 @@ class Client extends \SoapClient
         return $xml_response;
     }
 
-    public function __getLastRequestHeaders()
+    public function __getLastRequestHeaders(): string
     {
         return implode("\n", $this->lastRequestHeaders);
     }
 
-    public function __getLastResponseHeaders()
+    public function __getLastResponseHeaders(): string
     {
         return implode("\n", $this->lastResponseHeaders);
     }
 
-    public function __getLastRequest()
+    public function __getLastRequest(): string
     {
         return $this->lastRequestBody;
     }
 
-    public function __getLastResponse()
+    public function __getLastResponse(): string
     {
         return $this->lastResponseBody;
     }
